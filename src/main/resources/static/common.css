@@ -1,0 +1,53 @@
+body{
+    background-color:#07091E;
+    color: #BEDDF2;
+    font-family:"Gill Sans Ultra Bold Condensed", sans-serif;
+}
+#logo {
+    width: 200px;
+    height: 200px;
+    margin: 10px auto;
+}
+
+#logo a {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#logo a img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#menu {
+    background-color: #152445;
+    padding: 23px;
+    width:100%;
+    text-align: center;
+}
+
+#menu a:hover {
+    color: white;
+}
+#menu a {
+    margin: 4px 10px;
+    font-size: 20px;
+    color: #D6DBDA;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+#content{
+    width: 70%;
+    margin: 10px auto;
+    color:#CFCED1;
+    text-align: center;
+    font-size:25px;
+    padding-top:20px;
+}
+
