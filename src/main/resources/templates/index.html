@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Moon Game Store</title>
     <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 <div id="logo">
@@ -19,7 +20,18 @@
 </div>
 
 <div id="content">
+    <form method="get">
+        <input type="text" name="pattern" th:value="${pattern}" placeholder="search...">
+        <input type="submit" value="search">
+    </form>
 
+    <div class="game" th:each="game : ${games}">
+        <div><img th:height="300" th:src="@{'/game-logos/' + ${game.picture}}" class="picture"></div>
+        <div th:text="${game.title}" class="title">tytul</div>
+        <div th:text="${game.description}" class="description">opis</div>
+        <div th:text="${game.tags}" class="tags">tagi</div>
+        <div th:text="${game.price} + ' €'" class="price">cena</div>
+    </div>
 </div>
 </body>
 </html>

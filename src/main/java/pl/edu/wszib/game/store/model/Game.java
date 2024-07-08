@@ -16,4 +16,5 @@ public class Game {
     private double price;
     private List<String> tags;
     private String description;
+    private String picture;
 }
