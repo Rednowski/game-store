@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Moon Game Store</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+<div th:insert="fragments"></div>
+
+<div id="content">
+    <form id="login-form" method="post">
+        <p th:if="${loginInfo != null}" th:text="${loginInfo}"></p>
+        <input type="text" placeholder="Login" name="login">
+        <input type="password" placeholder="Password" name="password">
+        <input type="submit" value="Log in">
+    </form>
+</div>
+</body>
+</html>

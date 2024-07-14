@@ -1,6 +1,8 @@
 package pl.edu.wszib.game.store.controllers;
 
 
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,9 @@ import pl.edu.wszib.game.store.dao.IGameDAO;
 public class CommonController {
 
     private final IGameDAO gameDAO;
+
+    @Autowired
+    HttpSession httpSession;
 
     public CommonController(IGameDAO gameDAO) {
         this.gameDAO = gameDAO;
@@ -26,6 +31,7 @@ public class CommonController {
             model.addAttribute("games", this.gameDAO.getByPattern(pattern));
             model.addAttribute("pattern",pattern);
         }
+        model.addAttribute("logged", httpSession.getAttribute("logged"));
         return "index";
     }
 

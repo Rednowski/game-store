@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Moon Game Store</title>
@@ -7,18 +7,7 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-<div id="logo">
-    <a href="/">
-        <img src = "moon-logo.png">
-    </a>
-</div>
-
-<div id ="menu">
-    <a href="/">STORE</a>
-    <a href="/library">LIBRARY</a>
-    <a href="/about">ABOUT</a>
-</div>
-
+<div th:replace="~{fragments.html}"></div>
 <div id="content">
     <form method="get">
         <input type="text" name="pattern" th:value="${pattern}" placeholder="search...">

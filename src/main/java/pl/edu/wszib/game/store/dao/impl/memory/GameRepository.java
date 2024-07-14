@@ -13,15 +13,17 @@ public class GameRepository implements IGameDAO {
 
     List<Game> games = new ArrayList<>();
 
-    private int lastId = 0;
-    public GameRepository() {
-        games.add(new Game(++lastId, "The Witcher 3", "CD Projekt", 59.99,
+    private final IdSequence idSequence;
+
+    public GameRepository(IdSequence idSequence) {
+        this.idSequence = idSequence;
+        games.add(new Game(this.idSequence.getId(), "The Witcher 3", "CD Projekt", 59.99,
             List.of("RPG", "Open World", "Fantasy"), "An epic game about the witcher Geralt.", "witcher3.jpg"));
-        games.add(new Game(++lastId, "Battlefield 4", "Electronic Arts", 29.99,
+        games.add(new Game(this.idSequence.getId(), "Battlefield 4", "Electronic Arts", 29.99,
                 List.of("FPS", "Multiplayer", "Simulator", "War"), "An intense war shooter.", "bf4.jpg"));
-        games.add(new Game(++lastId, "Elden Ring", "FromSoftware", 69.99,
+        games.add(new Game(this.idSequence.getId(), "Elden Ring", "FromSoftware", 69.99,
                 List.of("Action RPG", "Fantasy", "Dark Fantasy", "Soulslike"), "A new game from the creators of Dark Souls.", "eldenring.jpg"));
-        games.add(new Game(++lastId, "Cyberpunk 2077", "CD Projekt", 49.99,
+        games.add(new Game(this.idSequence.getId(), "Cyberpunk 2077", "CD Projekt", 49.99,
                 List.of("RPG", "FPS", "Cyberpunk", "Open World"), "Future, technology, and conspiracy.", "cyberpunk.jpg"));    }
 
     @Override
@@ -48,7 +50,7 @@ public class GameRepository implements IGameDAO {
 
     @Override
     public void save(Game game) {
-        game.setId(++this.lastId);
+        game.setId(this.idSequence.getId());
         this.games.add(game);
     }
 

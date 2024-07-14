@@ -13,14 +13,16 @@ import java.util.Optional;
 @Component
 public class UserRepository implements IUserDAO {
     private final List<User> users = new ArrayList<>();
-    private int lastId = 0;
 
-    public UserRepository() {
-        this.users.add(new User(++lastId, "Jan", "Kowalski", "janek",
+    private final IdSequence idSequence;
+
+    public UserRepository(IdSequence idSequence) {
+        this.idSequence = idSequence;
+        this.users.add(new User(this.idSequence.getId(), "Jan", "Kowalski", "janek",
                 DigestUtils.md5DigestAsHex("janek123".getBytes()), User.Role.USER));
-        this.users.add(new User(++lastId, "Maciek", "Nowak", "maciek",
+        this.users.add(new User(this.idSequence.getId(), "Maciek", "Nowak", "maciek",
                 DigestUtils.md5DigestAsHex("maciek123".getBytes()), User.Role.USER));
-        this.users.add(new User(++lastId, "Admin", "Admin", "admin",
+        this.users.add(new User(this.idSequence.getId(), "Admin", "Admin", "admin",
                 DigestUtils.md5DigestAsHex("admin".getBytes()), User.Role.ADMIN));
     }
 
@@ -43,7 +45,7 @@ public class UserRepository implements IUserDAO {
 
     @Override
     public void save(User user) {
-        user.setId(++this.lastId);
+        user.setId(this.idSequence.getId());
         this.getByLogin(user.getLogin()).ifPresent(user1 -> {
             throw new LoginAlreadyExistsException();
         });
@@ -70,12 +72,12 @@ public class UserRepository implements IUserDAO {
 
     private User copy(User user) {
         User user1 = new User();
-        user1.setId(user1.getId());
-        user1.setRole(user1.getRole());
-        user1.setName(user1.getName());
-        user1.setSurname(user1.getSurname());
-        user1.setLogin(user1.getLogin());
-        user1.setPassword(user1.getPassword());
+        user1.setId(user.getId());
+        user1.setRole(user.getRole());
+        user1.setName(user.getName());
+        user1.setSurname(user.getSurname());
+        user1.setLogin(user.getLogin());
+        user1.setPassword(user.getPassword());
         return user1;
     }
 }
