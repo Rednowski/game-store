@@ -7,7 +7,7 @@
 <body>
 <div id="logo" th:fragment="logo">
     <a href="/">
-        <img src = "moon-logo.png">
+        <img src = "/moon-logo.png">
     </a>
 </div>
 
@@ -17,6 +17,7 @@
     <a href="/about">ABOUT</a>
     <a href="/login" th:if="${session.user == null}">LOGIN</a>
     <a href="/logout" th:if="${session.user != null}">LOGOUT</a>
+    <a href="/game/add" th:if="${session.user?.getRole() == T(pl.edu.wszib.game.store.model.User.Role).ADMIN}">ADD GAME</a>
 </div>
 
 </body>

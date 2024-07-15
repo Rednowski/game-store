@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Moon Game Store</title>
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/gameForm.css">
+</head>
+<body>
+<div th:insert="fragments"></div>
+
+<div id="content">
+    <form id="game-form" method="post"
+          th:action="@{/game/upload}" enctype="multipart/form-data">
+        <input type="text" placeholder="title" th:field="${gameModel.title}">
+        <input type="text" placeholder="publisher" th:field="${gameModel.publisher}">
+        <input type="text" placeholder="tags" th:field="${gameModel.tags}">
+        <input type="text" placeholder="description"
+               name="description" th:field="${gameModel.description}">
+        <input type="number" step="0.01"
+               placeholder="price" th:field="${gameModel.price}">
+        <label>Image: (if empty then placeholder image will be set)</label>
+        <input type="file" name="image" accept="image/png, image/jpeg"/>
+        <input type="submit" value="Add game">
+    </form>
+</div>
+</body>
+</html>
