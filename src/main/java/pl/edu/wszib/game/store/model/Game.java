@@ -2,6 +2,7 @@ package pl.edu.wszib.game.store.model;
 
 import lombok.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @AllArgsConstructor
@@ -14,7 +15,12 @@ public class Game {
     private String title;
     private String publisher;
     private double price;
-    private List<String> tags;
+    private String tags;
     private String description;
     private String picture;
+
+    public List<String> getTagsList() {
+        return Arrays.asList(tags.split(", "));
+    }
 }
+

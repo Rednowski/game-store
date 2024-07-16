@@ -18,13 +18,13 @@ public class GameRepository implements IGameDAO {
     public GameRepository(IdSequence idSequence) {
         this.idSequence = idSequence;
         games.add(new Game(this.idSequence.getId(), "The Witcher 3", "CD Projekt", 59.99,
-            List.of("RPG", "Open World", "Fantasy"), "An epic game about the witcher Geralt.", "witcher3.jpg"));
+            "RPG, Open World, Fantasy", "An epic game about the witcher Geralt.", "witcher3.jpg"));
         games.add(new Game(this.idSequence.getId(), "Battlefield 4", "Electronic Arts", 29.99,
-                List.of("FPS", "Multiplayer", "Simulator", "War"), "An intense war shooter.", "bf4.jpg"));
+                "FPS, Multiplayer, Simulator, War", "An intense war shooter.", "bf4.jpg"));
         games.add(new Game(this.idSequence.getId(), "Elden Ring", "FromSoftware", 69.99,
-                List.of("Action RPG", "Fantasy", "Dark Fantasy", "Soulslike"), "A new game from the creators of Dark Souls.", "eldenring.jpg"));
+                "Action RPG, Fantasy, Dark Fantasy, Soulslike", "A new game from the creators of Dark Souls.", "eldenring.jpg"));
         games.add(new Game(this.idSequence.getId(), "Cyberpunk 2077", "CD Projekt", 49.99,
-                List.of("RPG", "FPS", "Cyberpunk", "Open World"), "Future, technology, and conspiracy.", "cyberpunk.jpg"));    }
+                "RPG, FPS, Cyberpunk, Open World", "Future, technology, and conspiracy.", "cyberpunk.jpg"));    }
 
     @Override
     public Optional<Game> getById(final int id) {
@@ -42,7 +42,7 @@ public class GameRepository implements IGameDAO {
                         .toLowerCase().contains(pattern.toLowerCase()) ||
                         game.getPublisher().toLowerCase()
                                 .contains(pattern.toLowerCase()) ||
-                game.getTags().stream().anyMatch(tag -> tag.toLowerCase()
+                game.getTagsList().stream().anyMatch(tag -> tag.toLowerCase()
                         .contains(pattern.toLowerCase())))
                 .map(this::copy)
                 .toList();
@@ -70,6 +70,17 @@ public class GameRepository implements IGameDAO {
             g.setDescription(game.getDescription());
             g.setPicture(game.getPicture());
         });
+    }
+    @Override
+    public void updateNoPicture(final Game game){
+        this.games.stream().filter(g -> g.getId() == game.getId())
+                .findAny().ifPresent(g -> {
+                    g.setTitle(game.getTitle());
+                    g.setTags(game.getTags());
+                    g.setPublisher(game.getPublisher());
+                    g.setPrice(game.getPrice());
+                    g.setDescription(game.getDescription());
+                });
     }
 
     private Game copy(Game game){

@@ -12,4 +12,5 @@ public interface IGameDAO {
     void save(Game game);
     void remove(int id);
     void update(Game game);
+    void updateNoPicture(final Game game);
 }

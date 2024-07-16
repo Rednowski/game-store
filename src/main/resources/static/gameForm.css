@@ -7,8 +7,9 @@ input[type=text], input[type=number] {
     width:300px;
 }
 
-input[name = "description"] {
+textarea[name = "description"] {
     height: 100px;
+    width: 300px;
 }
 
 input[type=submit] {

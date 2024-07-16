@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="icon" href="/moon-logo-icon.png">
 <head>
     <meta charset="UTF-8">
     <title>Moon Game Store</title>
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/login.css">
+    <script src="/login-validator.js"></script>
 </head>
 <body>
 <div th:insert="fragments"></div>
 
 <div id="content">
-    <form id="login-form" method="post">
+    <form id="login-form" method="post" onsubmit="return validate()">
         <p th:if="${loginInfo != null}" th:text="${loginInfo}"></p>
-        <input type="text" placeholder="Login" name="login">
-        <input type="password" placeholder="Password" name="password">
+        <input type="text" placeholder="Login" name="login" id="login-field">
+        <input type="password" placeholder="Password" name="password" id="password-field">
         <input type="submit" value="Log in">
     </form>
 </div>

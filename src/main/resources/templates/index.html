@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
+<link rel="icon" href="/moon-logo-icon.png">
 <head>
     <meta charset="UTF-8">
     <title>Moon Game Store</title>
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/index.css">
 </head>
 <body>
 <div th:replace="~{fragments.html}"></div>
@@ -20,6 +21,7 @@
         <div th:text="${game.description}" class="description">opis</div>
         <div th:text="${game.tags}" class="tags">tagi</div>
         <div th:text="${game.price} + ' €'" class="price">cena</div>
+        <a th:href="@{/game/edit/{id}(id=${game.id})}" th:if="${session.user?.getRole() == T(pl.edu.wszib.game.store.model.User.Role).ADMIN}">Edit</a>
     </div>
 </div>
 </body>
