@@ -13,5 +13,4 @@ import pl.edu.wszib.game.store.model.User;
 public class SessionObject {
     User user;
     String info;
-    int cos;
 }

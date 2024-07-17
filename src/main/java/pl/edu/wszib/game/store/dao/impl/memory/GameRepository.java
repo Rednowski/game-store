@@ -1,6 +1,6 @@
 package pl.edu.wszib.game.store.dao.impl.memory;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import pl.edu.wszib.game.store.dao.IGameDAO;
 import pl.edu.wszib.game.store.model.Game;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class GameRepository implements IGameDAO {
 
     List<Game> games = new ArrayList<>();
@@ -72,7 +72,7 @@ public class GameRepository implements IGameDAO {
         });
     }
     @Override
-    public void updateNoPicture(final Game game){
+    public void updateKeepPicture(final Game game){
         this.games.stream().filter(g -> g.getId() == game.getId())
                 .findAny().ifPresent(g -> {
                     g.setTitle(game.getTitle());

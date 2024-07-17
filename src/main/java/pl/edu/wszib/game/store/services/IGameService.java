@@ -1,16 +1,15 @@
-package pl.edu.wszib.game.store.dao;
+package pl.edu.wszib.game.store.services;
 
 import pl.edu.wszib.game.store.model.Game;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface IGameDAO {
+public interface IGameService {
+    void save(Game game);
     Optional<Game> getById(int id);
+    void update(Game game, int id, String fileName);
+    void updateKeepPicture(Game game, int id);
     List<Game> getAll();
     List<Game> getByPattern(String pattern);
-    void save(Game game);
-    void remove(int id);
-    void update(Game game);
-    void updateKeepPicture(final Game game);
 }

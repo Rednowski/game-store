@@ -1,6 +1,6 @@
 package pl.edu.wszib.game.store.dao.impl.memory;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.DigestUtils;
 import pl.edu.wszib.game.store.dao.IUserDAO;
 import pl.edu.wszib.game.store.exceptions.LoginAlreadyExistsException;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class UserRepository implements IUserDAO {
     private final List<User> users = new ArrayList<>();
 
