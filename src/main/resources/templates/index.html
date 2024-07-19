@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<link rel="icon" href="/moon-logo-icon.png">
 <head>
     <meta charset="UTF-8">
     <title>Moon Game Store</title>
     <link rel="stylesheet" href="/common.css">
     <link rel="stylesheet" href="/index.css">
+    <link rel="icon" href="/moon-logo-icon.png">
 </head>
 <body>
 <div th:replace="~{fragments.html}"></div>
 <div id="content">
-    <form method="get">
-        <input type="text" name="pattern" th:value="${pattern}" placeholder="search...">
-        <input type="submit" value="search">
+    <form method="get" id="search-form">
+        <input type="text" name="pattern" th:value="${pattern}" placeholder="Search...">
+        <input type="submit" value="Search">
     </form>
 
-    <div class="game" th:each="game : ${games}">
-        <div><img th:height="300" th:src="@{'/game-logos/' + ${game.picture}}" class="picture"></div>
-        <div th:text="${game.title}" class="title">tytul</div>
-        <div th:text="${game.description}" class="description">opis</div>
-        <div th:text="${game.tags}" class="tags">tagi</div>
-        <div th:text="${game.price} + ' €'" class="price">cena</div>
-        <a th:href="@{/game/edit/{id}(id=${game.id})}" th:if="${session.user?.getRole() == T(pl.edu.wszib.game.store.model.User.Role).ADMIN}">Edit</a>
-        <a th:href="@{/cart/add/{id}(id=${game.id})}" th:if="${session.user != null}">Add to cart</a>
+    <div class="games" th:each="game : ${games}">
+        <div class="game">
+            <div class="game-image"><img th:src="@{'/game-logos/' + ${game.picture}}" alt="Game Image"></div>
+            <div class="game-details">
+                <div class="title" th:text="${game.title}">Title</div>
+                <div class="description" th:text="${game.description}">Description</div>
+                <div class="tags" th:text="${game.tags}">Tags</div>
+                <div class="price" th:text="${game.price} + ' €'">Price</div>
+                <div class="actions">
+                    <a th:href="@{/game/edit/{id}(id=${game.id})}" th:if="${session.user?.getRole() == T(pl.edu.wszib.game.store.model.User.Role).ADMIN}">Edit</a>
+                    <a th:href="@{/cart/add/{id}(id=${game.id})}" th:if="${session.user != null}">Add to Cart</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
