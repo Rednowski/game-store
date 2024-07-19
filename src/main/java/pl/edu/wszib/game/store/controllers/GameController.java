@@ -1,8 +1,5 @@
 package pl.edu.wszib.game.store.controllers;
 
-import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -11,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.edu.wszib.game.store.exceptions.GameValidationException;
 import pl.edu.wszib.game.store.model.Game;
 import pl.edu.wszib.game.store.image.handling.FileUpload;
-import pl.edu.wszib.game.store.model.User;
 import pl.edu.wszib.game.store.services.IGameService;
 import pl.edu.wszib.game.store.validators.GameValidator;
 
@@ -19,31 +15,27 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Controller
+@RequestMapping(path = "/game")
 public class GameController {
 
 
     private final IGameService gameService;
-    private final HttpSession httpSession;
 
     public static String uploadDir = "src/main/resources/static/game-logos";
 
-    public GameController(IGameService gameService, HttpSession httpSession) {
+    public GameController(IGameService gameService) {
         this.gameService = gameService;
-        this.httpSession = httpSession;
     }
 
-    @RequestMapping(path = "/game/add", method = RequestMethod.GET)
+    @RequestMapping(path = "/add", method = RequestMethod.GET)
     public String addForm(Model model) {
         model.addAttribute("gameModel", new Game());
         return "gameForm";
     }
 
-    @PostMapping(path = "/game/add")
+    @PostMapping(path = "/add")
     public String saveGame(Game game, @RequestParam("image")
                                  MultipartFile image) throws IOException {
-        if(((User) this.httpSession.getAttribute("user")).getRole() != User.Role.ADMIN) {
-            return "redirect:/";
-        }
         try {
             GameValidator.validateDescription(game.getDescription());
             GameValidator.validateTags(game.getTags());
@@ -68,7 +60,7 @@ public class GameController {
         return "redirect:/";
     }
 
-    @RequestMapping(path = "/game/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/edit/{id}", method = RequestMethod.GET)
     public String editForm(@PathVariable int id, Model model) {
         Optional<Game> gameBox = this.gameService.getById(id);
         if(gameBox.isEmpty()) {
@@ -79,14 +71,10 @@ public class GameController {
         return "gameForm";
     }
 
-    @PostMapping(path = "/game/edit/{id}")
+    @PostMapping(path = "/edit/{id}")
     public String editGame(@ModelAttribute Game game,
                            @PathVariable int id,
                            @RequestParam("image") MultipartFile image) throws IOException {
-
-        if(((User) this.httpSession.getAttribute("user")).getRole() != User.Role.ADMIN) {
-            return "redirect:/";
-        }
         try {
             GameValidator.validateDescription(game.getDescription());
             GameValidator.validateTags(game.getTags());

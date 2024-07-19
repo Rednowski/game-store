@@ -22,6 +22,7 @@
         <div th:text="${game.tags}" class="tags">tagi</div>
         <div th:text="${game.price} + ' €'" class="price">cena</div>
         <a th:href="@{/game/edit/{id}(id=${game.id})}" th:if="${session.user?.getRole() == T(pl.edu.wszib.game.store.model.User.Role).ADMIN}">Edit</a>
+        <a th:href="@{/cart/add/{id}(id=${game.id})}" th:if="${session.user != null}">Add to cart</a>
     </div>
 </div>
 </body>
