@@ -1,6 +1,7 @@
 .games {
     display: inline-flex;
-    width: 48%;
+    width: 49%;
+    justify-content: center;
 }
 
 .game {
