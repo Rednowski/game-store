@@ -43,4 +43,9 @@ public class CartController {
 
         return "redirect:/";
     }
+
+    @GetMapping
+    public String cart() {
+        return "cart";
+    }
 }

@@ -4,16 +4,25 @@
     <meta charset="UTF-8">
     <title>Moon Game Store</title>
     <link rel="stylesheet" href="/common.css">
-    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/cart.css">
     <link rel="icon" href="/moon-logo-icon.png">
 </head>
 <body>
 <div th:replace="~{fragments.html}"></div>
 <div id="content">
-    <form method="get" id="search-form">
-        <input type="text" name="pattern" th:value="${pattern}" placeholder="Search...">
-        <input type="submit" value="Search">
-    </form>
+
+    <div class="cart-row">
+        <div>Title</div>
+        <div>Publisher</div>
+        <div>Price</div>
+    </div>
+
+    <div th:each="position : ${session.cart}" class="cart-row">
+        <div th:text="${position.game.title}">Title</div>
+        <div th:text="${position.game.publisher}">Publisher</div>
+        <div th:text="${position.game.price} + '€'">Price</div>
+    </div>
+
 
     <div class="games" th:each="game : ${games}">
         <div class="game">
