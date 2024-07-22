@@ -11,5 +11,6 @@ public interface IGameService {
     void update(Game game, int id, String fileName);
     void updateKeepPicture(Game game, int id);
     List<Game> getAll();
+    List<Game> getAllUserGames(List<Integer> ids);
     List<Game> getByPattern(String pattern);
 }

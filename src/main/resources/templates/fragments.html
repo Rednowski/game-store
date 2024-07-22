@@ -14,7 +14,7 @@
 
 <div id ="menu" th:fragment="menu">
     <a href="/">STORE</a>
-    <a href="/library">LIBRARY</a>
+    <a href="/library" th:if="${session.user != null}">LIBRARY</a>
     <a href="/about">ABOUT</a>
     <a href="/login" th:if="${session.user == null}">LOGIN</a>
     <a href="/logout" th:if="${session.user != null}">LOGOUT</a>

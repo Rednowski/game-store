@@ -1,20 +1,27 @@
 package pl.edu.wszib.game.store.controllers;
 
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.edu.wszib.game.store.model.User;
 import pl.edu.wszib.game.store.services.IGameService;
+import pl.edu.wszib.game.store.session.SessionConstants;
+
+import java.util.List;
 
 @Controller
 public class CommonController {
 
     private final IGameService gameService;
+    private final HttpSession httpSession;
 
-    public CommonController(IGameService gameService) {
+    public CommonController(IGameService gameService, HttpSession httpSession) {
         this.gameService = gameService;
+        this.httpSession = httpSession;
     }
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
@@ -35,7 +42,13 @@ public class CommonController {
     }
 
     @RequestMapping(path = "library", method = RequestMethod.GET)
-    public String library() {
+    public String library(Model model) {
+        User user = (User) this.httpSession.getAttribute(SessionConstants.USER_KEY);
+        if(user == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("games",
+                this.gameService.getAllUserGames(user.getOwnedGames().stream().toList()));
         return "library";
     }
 }

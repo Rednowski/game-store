@@ -45,6 +45,11 @@ public class GameService implements IGameService {
     }
 
     @Override
+    public List<Game> getAllUserGames(List<Integer> ids) {
+        return this.gameDAO.getAll().stream().filter(game -> ids.contains(game.getId())).toList();
+    }
+
+    @Override
     public List<Game> getByPattern(String pattern) {
         return this.gameDAO.getByPattern(pattern);
     }

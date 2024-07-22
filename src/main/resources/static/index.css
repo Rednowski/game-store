@@ -67,3 +67,8 @@
 .game .actions a:hover {
     background-color: #555;
 }
+
+.owned {
+    color:greenyellow;
+    margin-top:10px ;
+}

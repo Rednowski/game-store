@@ -23,22 +23,15 @@
         <div th:text="${position.game.price} + '€'">Price</div>
     </div>
 
-
-    <div class="games" th:each="game : ${games}">
-        <div class="game">
-            <div class="game-image"><img th:src="@{'/game-logos/' + ${game.picture}}" alt="Game Image"></div>
-            <div class="game-details">
-                <div class="title" th:text="${game.title}">Title</div>
-                <div class="description" th:text="${game.description}">Description</div>
-                <div class="tags" th:text="${game.tags}">Tags</div>
-                <div class="price" th:text="${game.price} + ' €'">Price</div>
-                <div class="actions">
-                    <a th:href="@{/game/edit/{id}(id=${game.id})}" th:if="${session.user?.getRole() == T(pl.edu.wszib.game.store.model.User.Role).ADMIN}">Edit</a>
-                    <a th:href="@{/cart/add/{id}(id=${game.id})}" th:if="${session.user != null}">Add to Cart</a>
-                </div>
-            </div>
-        </div>
+    <div class="cart-row">
+        <div></div>
+        <div></div>
+        <div>Total: </div>
+        <div th:text="${cartSum}"></div>
     </div>
+
+    <a href="/order">Order</a>
+
 </div>
 </body>
 </html>

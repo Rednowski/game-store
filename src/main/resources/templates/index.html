@@ -14,7 +14,6 @@
         <input type="text" name="pattern" th:value="${pattern}" placeholder="Search...">
         <input type="submit" value="Search">
     </form>
-
     <div class="games" th:each="game : ${games}">
         <div class="game">
             <div class="game-image"><img th:src="@{'/game-logos/' + ${game.picture}}" alt="Game Image"></div>
@@ -24,9 +23,13 @@
                 <div class="tags" th:text="${game.tags}">Tags</div>
                 <div class="price" th:text="${game.price} + ' €'">Price</div>
                 <div class="actions">
-                    <a th:href="@{/game/edit/{id}(id=${game.id})}" th:if="${session.user?.getRole() == T(pl.edu.wszib.game.store.model.User.Role).ADMIN}">Edit</a>
-                    <a th:href="@{/cart/add/{id}(id=${game.id})}" th:if="${session.user != null}">Add to Cart</a>
+                    <a th:href="@{/game/edit/{id}(id=${game.id})}" th:if="${session.user?.getRole()
+                     == T(pl.edu.wszib.game.store.model.User.Role).ADMIN}">Edit</a>
+                    <a th:href="@{/cart/add/{id}(id=${game.id})}" th:if="${session.user != null &&
+                     !session.user.getOwnedGames().contains(game.getId())}" >Add to Cart</a>
                 </div>
+                <div class="owned" th:href="@{/cart/add/{id}(id=${game.id})}"
+                     th:if="${session.user != null && session.user.getOwnedGames().contains(game.getId())}">Owned</div>
             </div>
         </div>
     </div>

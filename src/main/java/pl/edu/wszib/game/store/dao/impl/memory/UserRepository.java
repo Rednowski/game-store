@@ -2,8 +2,11 @@ package pl.edu.wszib.game.store.dao.impl.memory;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.util.DigestUtils;
+import pl.edu.wszib.game.store.dao.IGameDAO;
 import pl.edu.wszib.game.store.dao.IUserDAO;
 import pl.edu.wszib.game.store.exceptions.LoginAlreadyExistsException;
+import pl.edu.wszib.game.store.exceptions.NoGameFound;
+import pl.edu.wszib.game.store.exceptions.UserIsEmpty;
 import pl.edu.wszib.game.store.model.User;
 
 import java.util.ArrayList;
@@ -15,9 +18,12 @@ public class UserRepository implements IUserDAO {
     private final List<User> users = new ArrayList<>();
 
     private final IdSequence idSequence;
+    private final IGameDAO gameDAO;
 
-    public UserRepository(IdSequence idSequence) {
+
+    public UserRepository(IdSequence idSequence, IGameDAO gameDAO) {
         this.idSequence = idSequence;
+        this.gameDAO = gameDAO;
         this.users.add(new User(this.idSequence.getId(), "Jan", "Kowalski", "janek",
                 DigestUtils.md5DigestAsHex("janek123".getBytes()), User.Role.USER));
         this.users.add(new User(this.idSequence.getId(), "Maciek", "Nowak", "maciek",
@@ -25,6 +31,7 @@ public class UserRepository implements IUserDAO {
         this.users.add(new User(this.idSequence.getId(), "Admin", "Admin", "admin",
                 DigestUtils.md5DigestAsHex("admin".getBytes()), User.Role.ADMIN));
     }
+
 
     @Override
     public Optional<User> getById(final int id) {
@@ -67,7 +74,21 @@ public class UserRepository implements IUserDAO {
             user1.setSurname(user.getSurname());
             user1.setLogin(user.getLogin());
             user1.setPassword(user.getPassword());
+            user1.setOwnedGames(user.getOwnedGames());
         });
+    }
+
+    @Override
+    public void addGameToUser(User user, int gameId) {
+        if(user == null) {
+            throw new UserIsEmpty();
+        }
+
+        if(gameDAO.getById(gameId).isEmpty()) {
+            throw new NoGameFound();
+        }
+
+        user.getOwnedGames().add(gameId);
     }
 
     private User copy(User user) {
@@ -78,6 +99,7 @@ public class UserRepository implements IUserDAO {
         user1.setSurname(user.getSurname());
         user1.setLogin(user.getLogin());
         user1.setPassword(user.getPassword());
+        user1.setOwnedGames(user.getOwnedGames());
         return user1;
     }
 }

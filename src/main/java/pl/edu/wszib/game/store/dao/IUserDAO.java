@@ -1,5 +1,6 @@
 package pl.edu.wszib.game.store.dao;
 
+import pl.edu.wszib.game.store.model.Game;
 import pl.edu.wszib.game.store.model.User;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface IUserDAO {
     void save(User user);
     void remove(int id);
     void update(User user);
+    void addGameToUser(User user, int gameId);
 }
