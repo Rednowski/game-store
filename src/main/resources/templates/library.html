@@ -13,14 +13,12 @@
 
 <div id="content">
         <div th:if="${session.user == null}"> Please log in to see your owned games.</div>
-    <div th:if="${session.user != null}">
+    <div th:if="${session.user != null}" id="library">
             <div class="games" th:each="game : ${games}">
                 <div class="game">
                     <div class="game-image"><img th:src="@{'/game-logos/' + ${game.picture}}" alt="Game Image"></div>
                     <div class="game-details">
                         <div class="title" th:text="${game.title}">Title</div>
-                        <div class="description" th:text="${game.description}">Description</div>
-                        <div class="tags" th:text="${game.tags}">Tags</div>
                         <div class="actions">
                         </div>
                     </div>
