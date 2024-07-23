@@ -1,89 +1,74 @@
-body {
-    background-color: #07091E;
-    color: #BEDDF2;
-    font-family: 'Gill Sans Ultra Bold Condensed', sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-#logo {
-    width: 200px;
-    height: 200px;
-    margin: 20px auto;
-}
-
-#logo a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-#logo a img {
-    width: 100%;
-    height: 100%;
-}
-
-#menu {
-    background-color: #152445;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-#menu a {
-    margin: 0 15px;
-    font-size: 20px;
-    color: #D6DBDA;
-    text-transform: uppercase;
-    font-weight: 400;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-#menu a:hover {
-    color: #fff;
-}
-
-#content {
-    width: 80%;
-    margin: 20px auto;
-    color: #CFCED1;
-    font-size: 18px;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#search-form {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
+.games {
+    display: inline-flex;
+    width: 49%;
     justify-content: center;
-    align-items: center;
 }
 
-#search-form input[type="text"] {
-    padding: 10px;
-    font-size: 18px;
-    border: 2px solid #333;
-    border-radius: 5px 0 0 5px;
-    width: 300px;
+.game {
+    background-color: #1e1f29;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: calc(90% - 5px);
+    margin-bottom: 20px;
 }
 
-#search-form input[type="submit"] {
-    padding: 10px 20px;
+.game:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.game-image img {
+    width: 100%;
+    height: 600px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.game-details {
+    text-align: left;
+}
+
+.game .title {
     font-size: 18px;
-    border: 2px solid #333;
-    border-left: none;
-    border-radius: 0 5px 5px 0;
-    background-color: #333;
+    margin-bottom: 8px;
+}
+
+.game .description {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.game .tags {
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: #aaa;
+}
+
+.game .price {
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.game .actions a {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 8px 10px;
+    font-size: 12px;
     color: #fff;
-    cursor: pointer;
+    background-color: #333;
+    border-radius: 5px;
+    text-decoration: none;
     transition: background-color 0.3s;
 }
 
-#search-form input[type="submit"]:hover {
+.game .actions a:hover {
     background-color: #555;
+}
+
+.owned {
+    color:greenyellow;
+    margin-top:10px ;
 }
