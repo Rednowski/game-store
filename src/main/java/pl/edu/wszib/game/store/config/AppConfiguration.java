@@ -6,6 +6,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import pl.edu.wszib.game.store.filters.AdminFilter;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 @Configuration
 @ComponentScan("pl.edu.wszib.game.store")
 public class AppConfiguration {
@@ -20,5 +24,17 @@ public class AppConfiguration {
         registrationBean.setOrder(1);
 
         return registrationBean;
+    }
+
+    @Bean
+    public Connection jdbcConnection() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/moon_store", "root", "");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
