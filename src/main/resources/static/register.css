@@ -1,0 +1,64 @@
+#content {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+#register-form {
+    background-color: #1e1f29;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#register-form input[type="text"],
+#register-form input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #07091E;
+    color: #BEDDF2;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#register-form input[type="text"]:focus,
+#register-form input[type="password"]:focus {
+    border-color: #555;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#register-form input[type="submit"] {
+    padding: 15px;
+    width: 100%;
+    font-size: 18px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+#register-form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+#messages {
+    margin:0;
+    padding: 0;
+    width: 100%;
+    color: #e54139;
+    font-size: 14px;
+}
+#messages div {
+    text-align: left;
+    padding: 5px;
+}
