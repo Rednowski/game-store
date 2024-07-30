@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Moon Game Store</title>
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/cart.css">
+    <link rel="stylesheet" href="/orders.css">
+    <link rel="icon" href="/moon-logo-icon.png">
+    <script src="/position-click.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments.html}"></div>
+<div id="content">
+    <div th:if="${orders.isEmpty()}" class="info">You don't have any orders yet.</div>
+    <div class="order-row" th:if="${!orders.isEmpty()}">
+        <div>Id</div>
+        <div>Date</div>
+        <div>Status</div>
+        <div>Total</div>
+    </div>
+    <div class="wrapper" th:each="order: ${orders}" onclick="positionClick(this)">
+        <div class="order-row">
+            <div th:text="${order.id}"></div>
+            <div th:text="${order.getFormattedDate()}"></div>
+            <div th:text="${order.status}"></div>
+            <div th:text="${#numbers.formatDecimal(order.totalSum, 2, 2, 'POINT')}"></div>
+        </div>
+        <div class="position-wrapper">
+            <div class="cart-row">
+                <div>Title</div>
+                <div>Publisher</div>
+                <div>Price</div>
+            </div>
+            <div th:each="position : ${order.positions}" class="cart-row">
+                <div th:text="${position.game.title}">Title</div>
+                <div th:text="${position.game.publisher}">Publisher</div>
+                <div th:text="${position.game.price} + '€'">Price</div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

@@ -74,4 +74,14 @@ public class OrderService implements IOrderService {
         System.out.println(this.httpSession.getAttribute(SessionConstants.USER_KEY));
 
     }
+
+    @Override
+    public List<Order> getOrdersForCurrentUser() {
+        User user = (User) this.httpSession.getAttribute(SessionConstants.USER_KEY);
+        if(user == null) {
+            throw new UserIsEmpty();
+        }
+
+        return this.orderDAO.getOrderByUserId(user.getId());
+    }
 }

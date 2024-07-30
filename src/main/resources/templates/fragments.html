@@ -18,6 +18,7 @@
     <a href="/about">ABOUT</a>
     <a href="/login" th:if="${session.user == null}">LOGIN</a>
     <a href="/logout" th:if="${session.user != null}">LOGOUT</a>
+    <a href="/order" th:if="${session.user != null}">ORDERS</a>
     <a href="/game/add" th:if="${session.user?.getRole() == T(pl.edu.wszib.game.store.model.User.Role).ADMIN}">ADD GAME</a>
     <a href="/cart" th:if="${session.user != null}">CART</a>
 </div>

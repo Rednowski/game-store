@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,11 +22,14 @@ public class Order {
     private Set<Position> positions = new HashSet<>();
     private double totalSum;
 
-
+    public String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return this.date.format(formatter);
+    }
 
     public enum Status {
         NEW,
         PAID,
-        DONE
+        DONE;
     }
 }

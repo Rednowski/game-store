@@ -1,10 +1,10 @@
 package pl.edu.wszib.game.store.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.edu.wszib.game.store.exceptions.EmptyCartException;
 import pl.edu.wszib.game.store.exceptions.IncorrectPositionsException;
-import pl.edu.wszib.game.store.exceptions.NoGameFound;
 import pl.edu.wszib.game.store.exceptions.UserIsEmpty;
 import pl.edu.wszib.game.store.services.IOrderService;
 
@@ -17,7 +17,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/order")
+    @GetMapping("/order/add")
     public String order() {
         try {
             this.orderService.confirmOrder();
@@ -25,5 +25,16 @@ public class OrderController {
             return "redirect:/cart";
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/order")
+    public String orders(Model model) {
+        try {
+            model.addAttribute("orders", this.orderService.getOrdersForCurrentUser());
+        } catch (UserIsEmpty e) {
+            return "redirect:/";
+        }
+
+        return "orders";
     }
 }

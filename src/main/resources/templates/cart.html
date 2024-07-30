@@ -11,6 +11,9 @@
 <div th:replace="~{fragments.html}"></div>
 <div id="content">
 
+    <div th:if="${session.cart.isEmpty()}" class="info">Your cart is empty. <br>
+    Add games to your cart at <a href="/">Moon Game Store.</a></div>
+    <div th:if="${!session.cart.isEmpty()}">
     <div class="cart-row">
         <div>Title</div>
         <div>Publisher</div>
@@ -30,8 +33,8 @@
         <div th:text="${cartSum}"></div>
     </div>
 
-    <a href="/order">Order</a>
-
+    <a href="/order/add">Order</a>
+    </div>
 </div>
 </body>
 </html>
