@@ -35,7 +35,7 @@
             <div th:each="position : ${order.positions}" class="cart-row">
                 <div th:text="${position.game.title}">Title</div>
                 <div th:text="${position.game.publisher}">Publisher</div>
-                <div th:text="${position.game.price} + '€'">Price</div>
+                <div th:text="${#numbers.formatDecimal(position.game.price, 2, 2, 'POINT')} + '€'">Price</div>
             </div>
 
         </div>
