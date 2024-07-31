@@ -12,14 +12,17 @@
 <div th:replace="~{fragments.html}"></div>
 
 <div id="content">
-    <div th:if="${session.user != null}" class="info">You are already registered. Please <a href="/logout">log out</a> to create a new account</div>
+    <div th:if="${session.user != null}" class="info">You are already registered. Please <a href="/logout">log out</a>
+        to create a new account
+    </div>
     <div th:if="${session.user == null}">
         <div id="messages">
-        <div id="name-message"></div>
-        <div id="surname-message"></div>
-        <div id="login-message"></div>
-        <div id="password-message"></div>
-        <div id="confirm-password-message"></div>
+            <div th:if="${registerInfo != null}" th:text="${registerInfo}"></div>
+            <div id="name-message"></div>
+            <div id="surname-message"></div>
+            <div id="login-message"></div>
+            <div id="password-message"></div>
+            <div id="confirm-password-message"></div>
         </div>
         <form id="register-form" method="post" onsubmit="return validateRegister()">
             <label>Name</label><input type="text" name="name" id="name-field">

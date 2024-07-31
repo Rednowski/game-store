@@ -47,5 +47,18 @@ public class AuthenticationController {
         return "redirect:/";
     }
 
+    @RequestMapping(path="/register", method = RequestMethod.GET)
+    public String register(Model model) {
+        model.addAttribute("loginInfo", this.authenticationService.getLoginInfo());
+        this.httpSession.removeAttribute("loginInfo");
+        return "/register";
+    }
+
+    @RequestMapping(path="/register", method = RequestMethod.POST)
+    public String register2() {
+        //TODO dokonczyc kontroler, zrobić registerservice
+        return "redirect:/register";
+    }
+
 
 }

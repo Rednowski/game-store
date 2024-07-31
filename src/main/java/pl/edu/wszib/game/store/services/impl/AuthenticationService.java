@@ -36,6 +36,18 @@ public class AuthenticationService implements IAuthenticationService {
     }
 
     @Override
+    public void register(String login, String password, String name, String surname) {
+        Optional<User> user = this.userDAO.getByLogin(login);
+        if(user.isPresent()) {
+            this.httpSession.setAttribute("loginInfo", "That login is already taken.");
+        } else {
+            return;
+            // TODO walidacja i registeracja
+        }
+
+    }
+
+    @Override
     public void logout() {
         this.httpSession.removeAttribute(SessionConstants.USER_KEY);
         this.httpSession.removeAttribute(SessionConstants.CART_KEY);
